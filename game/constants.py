@@ -1,0 +1,68 @@
+# Screen dimensions
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+FPS = 60
+
+# Map dimensions (3x screen)
+TILE_SIZE = 32
+MAP_COLS = (SCREEN_WIDTH * 3) // TILE_SIZE   # 75
+MAP_ROWS = (SCREEN_HEIGHT * 3) // TILE_SIZE  # 56
+MAP_WIDTH = MAP_COLS * TILE_SIZE             # 2400
+MAP_HEIGHT = MAP_ROWS * TILE_SIZE            # 1792
+
+# Tile types
+TILE_FLOOR = 0
+TILE_WALL = 1
+TILE_DEST = 2   # destination tile (old-street brick)
+
+# Colors (pixel-art dark palette)
+C_BLACK       = (0,   0,   0)
+C_DARK_BG     = (18,  18,  30)
+C_FLOOR       = (38,  38,  58)
+C_FLOOR_ALT   = (44,  44,  66)
+C_WALL        = (22,  22,  40)
+C_WALL_EDGE   = (55,  40,  40)
+C_DEST_TILE   = (90,  70,  50)
+C_DEST_GROUT  = (60,  45,  30)
+C_WHITE       = (255, 255, 255)
+C_RED         = (220, 50,  50)
+C_GREEN       = (50,  220, 80)
+C_YELLOW      = (240, 220, 50)
+C_ORANGE      = (240, 140, 30)
+C_BLUE        = (60,  120, 220)
+C_PURPLE      = (140, 60,  200)
+C_DARK_RED    = (100, 20,  20)
+C_LIGHT_GRAY  = (180, 180, 200)
+C_DARK_GRAY   = (60,  60,  80)
+
+# Player
+PLAYER_HP       = 10000
+PLAYER_SPEED    = 200   # px/s
+PLAYER_RADIUS   = 14
+
+# Monster
+MONSTER_HP          = 5000
+MONSTER_SPEED       = 90    # px/s
+MONSTER_RADIUS      = 16
+MONSTER_MELEE_DMG   = 3000
+MONSTER_MELEE_CD    = 3.0
+MONSTER_RANGED_DMG  = 500
+MONSTER_RANGED_CD   = 3.0
+MONSTER_RANGED_RANGE = 350
+MONSTER_BULLET_SPEED = 220
+MONSTER_MAX_COUNT   = 5
+MONSTER_RESPAWN_TIME = 5.0
+
+# Skills
+SKILL_RANGED_DMG     = 1000
+SKILL_RANGED_CD      = 2.0
+SKILL_RANGED_SPEED   = 500
+SKILL_RANGED_RANGE   = 600
+
+SKILL_MELEE_DMG      = 2000
+SKILL_MELEE_CD       = 2.0
+SKILL_MELEE_RADIUS   = 80
+
+SKILL_SHIELD_REDUCTION = 0.5
+SKILL_SHIELD_DURATION  = 3.0
+SKILL_SHIELD_CD        = 5.0

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Dungeon</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Game Canvas (shown during gameplay) -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- UI Overlay (shown for non-game screens) -->
+  <div id="ui-overlay">
+
+    <!-- ── Lobby ── -->
+    <div id="lobby-screen" class="screen">
+      <div class="title-area">
+        <div class="title-line1">PIXEL</div>
+        <div class="title-line2">DUNGEON</div>
+        <div class="title-sub">── DARKNESS AWAITS ──</div>
+      </div>
+      <div class="btn-col">
+        <button id="btn-start"     class="game-btn primary">▶  Start Game</button>
+        <button id="btn-howtoplay" class="game-btn secondary">?  How to Play</button>
+      </div>
+    </div>
+
+    <!-- ── How to Play ── -->
+    <div id="howtoplay-screen" class="screen hidden">
+      <div class="panel">
+        <h2>HOW TO PLAY</h2>
+        <div class="instructions">
+          <section>
+            <h3>🎮 Movement &amp; Controls</h3>
+            <p><b>W A S D</b> — Move your character</p>
+            <p><b>Left Click</b> — Use the currently selected skill toward mouse cursor</p>
+            <p><b>Right Click</b> — Cycle active skill:  Skill 1 → 2 → 3 → 1 …</p>
+          </section>
+          <section>
+            <h3>⚔️ Skills (order set before each game)</h3>
+            <p><b>Ranged Attack</b> — Fires a glowing projectile toward the cursor.<br/>
+               Damage: <b>1 000</b> &nbsp;|&nbsp; Cooldown: <b>2 s</b></p>
+            <p><b>Melee Attack</b> — Strikes enemies in a cone toward the cursor (short range).<br/>
+               Damage: <b>2 000</b> &nbsp;|&nbsp; Cooldown: <b>2 s</b></p>
+            <p><b>Shield</b> — Wraps you in a golden barrier.<br/>
+               <b>50 % damage reduction</b> &nbsp;|&nbsp; Duration: <b>3 s</b> &nbsp;|&nbsp; Cooldown: <b>5 s</b> (after expiry)</p>
+          </section>
+          <section>
+            <h3>👾 Enemies</h3>
+            <p>Horror demons constantly chase you — there are always <b>5</b> on the map.</p>
+            <p>Each demon has <b>5 000 HP</b> and <b>respawns after 5 s</b>.</p>
+            <p>Contact damage: <b>3 000</b> every 3 s &nbsp;|&nbsp; Ranged spit: <b>500</b> every 3 s</p>
+          </section>
+          <section>
+            <h3>🏆 Objective</h3>
+            <p>Find and step onto the <b>golden exit tile</b> on the right edge of the dungeon.</p>
+            <p>A stone wall blocks the direct path — navigate around it!</p>
+            <p>Your HP: <b>10 000</b></p>
+          </section>
+          <section>
+            <h3>💡 Tips</h3>
+            <p>Use Shield before entering a group of demons.</p>
+            <p>Melee deals double the damage of Ranged — get close when it's safe.</p>
+            <p>Killed demons respawn, so don't waste time hunting — head for the exit!</p>
+          </section>
+        </div>
+        <button id="btn-back" class="game-btn secondary">← Back to Lobby</button>
+      </div>
+    </div>
+
+    <!-- ── Skill Ordering ── -->
+    <div id="skillorder-screen" class="screen hidden">
+      <div class="panel">
+        <h2>ORDER YOUR SKILLS</h2>
+        <p class="hint">Drag the cards to set the order.<br/>Skill slot 1 is your starting active skill.</p>
+        <div id="skill-list">
+          <!-- Filled by JS -->
+        </div>
+        <button id="btn-confirm" class="game-btn primary">⚔  Confirm &amp; Enter Dungeon</button>
+      </div>
+    </div>
+
+  </div><!-- /#ui-overlay -->
+
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+/* ── Reset & base ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #000;
+  overflow: hidden;
+  font-family: 'Courier New', Courier, monospace;
+  color: #fff;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── Canvas ── */
+#gameCanvas {
+  display: block;
+  position: fixed;
+  top: 0; left: 0;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  cursor: crosshair;
+}
+
+/* ── UI overlay ── */
+#ui-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 40%, #1a0a30 0%, #050008 60%, #000 100%);
+  z-index: 100;
+}
+#ui-overlay.hidden { display: none; }
+
+/* ── Screens ── */
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 620px;
+  padding: 24px;
+}
+.screen.hidden { display: none !important; }
+
+/* ── Lobby title ── */
+.title-area {
+  text-align: center;
+  margin-bottom: 54px;
+}
+.title-line1 {
+  font-size: clamp(52px, 10vw, 80px);
+  font-weight: 900;
+  color: #e8c533;
+  letter-spacing: 10px;
+  text-shadow: 4px 4px 0 #7a5c00, 8px 8px 0 #3a2a00;
+  line-height: 1;
+}
+.title-line2 {
+  font-size: clamp(40px, 8vw, 60px);
+  font-weight: 900;
+  color: #cc2200;
+  letter-spacing: 8px;
+  text-shadow: 4px 4px 0 #660000, 8px 8px 0 #220000;
+  line-height: 1;
+  margin-top: 4px;
+}
+.title-sub {
+  font-size: 13px;
+  color: #666;
+  letter-spacing: 5px;
+  margin-top: 14px;
+}
+
+/* ── Button column ── */
+.btn-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 280px;
+}
+
+/* ── Buttons ── */
+.game-btn {
+  padding: 13px 24px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.game-btn:active { transform: translate(2px, 2px) !important; box-shadow: none !important; }
+
+.game-btn.primary {
+  background: #cc2200;
+  color: #fff;
+  box-shadow: 4px 4px 0 #660000;
+}
+.game-btn.primary:hover { background: #ff3300; box-shadow: 6px 6px 0 #660000; }
+
+.game-btn.secondary {
+  background: #111120;
+  color: #999;
+  border: 2px solid #444;
+  box-shadow: 4px 4px 0 #111;
+}
+.game-btn.secondary:hover { color: #fff; border-color: #888; box-shadow: 6px 6px 0 #111; }
+
+/* ── Panel (how-to-play / skill-order) ── */
+.panel {
+  background: rgba(8, 4, 18, 0.97);
+  border: 2px solid #2a2a3a;
+  box-shadow: 0 0 50px rgba(200, 50, 0, 0.25), inset 0 0 30px rgba(0,0,0,0.6);
+  padding: 28px 32px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #440000 #0a0a14;
+}
+.panel::-webkit-scrollbar { width: 6px; }
+.panel::-webkit-scrollbar-track { background: #0a0a14; }
+.panel::-webkit-scrollbar-thumb { background: #440000; border-radius: 3px; }
+
+.panel h2 {
+  font-size: 22px;
+  color: #e8c533;
+  letter-spacing: 5px;
+  text-align: center;
+  text-shadow: 2px 2px 0 #7a5c00;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #2a2a3a;
+}
+
+/* ── How-to-play ── */
+.instructions section {
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #1a1a2a;
+}
+.instructions section:last-child { border-bottom: none; }
+.instructions h3 {
+  font-size: 13px;
+  color: #ff8844;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.instructions p {
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.9;
+  margin: 2px 0;
+}
+.instructions p b { color: #fff; }
+
+/* ── Skill ordering ── */
+.hint {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+#skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #0c0c1c;
+  border: 2px solid #2a2a3a;
+  cursor: grab;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.skill-item:hover  { border-color: #555; background: #161628; }
+.skill-item.dragging  { opacity: 0.45; transform: scale(0.96); cursor: grabbing; }
+.skill-item.drag-over { border-color: #e8c533; background: #1c1800; transform: scale(1.02); }
+
+.skill-num {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+  min-width: 52px;
+  text-align: center;
+}
+
+.skill-icon-box {
+  width: 44px; height: 44px;
+  border: 2px solid #333;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.icon-ranged { background: #001828; border-color: #0066aa; }
+.icon-melee  { background: #1a0600; border-color: #aa3300; }
+.icon-shield { background: #181800; border-color: #aaaa00; }
+
+.skill-info { flex: 1; }
+.skill-name {
+  font-size: 13px;
+  font-weight: bold;
+  color: #ddd;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+.skill-desc { font-size: 11px; color: #666; letter-spacing: 1px; }
